@@ -1,0 +1,44 @@
+! File: ssbar_correlations.cpp
+! This file contains commands to be read in for a Pythia8 run.
+! Lines not beginning with a letter or digit are comments.
+! Author: Rik Spijkers
+
+! user settings
+Main:numberOfEvents = 500000
+
+! std::out settings
+!Init:showMultipartonInteractions = off
+!Next:numberCount = 0    ! 0 means no progress is printed, default is 1000 (print once every 1000 events)
+!Next:numberShowEvent = 0
+
+Beams:idA = -11        ! beam 1 electron
+Beams:idB = 11        ! beam 2 positron
+PDF:lepton = off                   ! no radiation off ficititious e+e-
+Beams:eCM = 14000.      ! sqrt(s) = 14 TeV
+!Tune:pp = 14            ! tune 14 = MONASH
+
+! processes		 
+!SoftQCD:inelastic = on	 
+WeakSingleBoson:ffbar2gmZ = on
+23:onMode = off
+23:onIfAny = 1 2 3 4 5
+
+! Decay Supression
+!ParticleDecays:limitTau0 = on          ! Only particles with tau0 < tau0Max are decayed.
+!ParticleDecays:tau0Max = 0.01          ! tau0Max of 0.01 will stop all weak decays, allowing us to directly count charm/beauty hadrons. 
+
+! strange hadron decays off
+! Note that K0 (K0bar) are allowed to decay!
+! If we use decay suppression, these are redundant, except for the sigma0 which decays with tau0 ~ e(-8).
+! All other strange hadrons decay with tau0 > 10.
+130:mayDecay  = off     ! K0L
+321:mayDecay  = off     ! K+
+310:mayDecay  = off     ! K0s
+3122:mayDecay = off     ! labda0
+3112:mayDecay = off     ! sigma-
+3212:mayDecay = off     ! sigma0 ALWAYS NEED THIS
+3222:mayDecay = off     ! sigma+
+3312:mayDecay = off     ! xi-
+3322:mayDecay = off     ! xi+
+3334:mayDecay = off     ! omega-
+

@@ -1,0 +1,87 @@
+! File: ssbar_correlations.cpp
+! This file is adapted from the WithMPI_RopesALICE.cmnd file, by Renan Acconcia
+! This file contains commands to be read in for a Pythia8 run.
+! Lines not beginning with a letter or digit are comments.
+! Author: Rik Spijkers
+
+! user settings
+Main:numberOfEvents = 5000
+
+! std::out settings
+Init:showMultipartonInteractions = off
+Next:numberCount = 0    ! 0 means no progress is printed, default is 1000 (print once every 1000 events)
+Next:numberShowEvent = 0
+
+Beams:eCM = 14000.      ! sqrt(s) = 14 TeV
+Tune:pp = 14            ! tune 14 = MONASH
+
+! mode 2 QCD from skands
+
+StringPT:sigma = 0.335
+StringZ:aLund = 0.36
+StringZ:bLund = 0.56
+StringFlav:probQQtoQ = 0.078
+StringFlav:ProbStoUD = 0.2
+StringFlav:probQQ1toQQ0join = 0.0275,0.0275,0.0275,0.0275
+
+MultiPartonInteractions:pT0Ref = 2.15
+
+BeamRemnants:remnantMode = 1
+BeamRemnants:saturation = 5
+
+ColourReconnection:mode = 1             ! 1 = More QCD scheme (this is also used in "mode 2" from skands, confusingly enough)
+ColourReconnection:allowDoubleJunRem = off
+ColourReconnection:m0 = 0.3
+ColourReconnection:allowJunctions = on
+ColourReconnection:junctionCorrection = 1.20
+ColourReconnection:timeDilationMode = 2
+ColourReconnection:timeDilationPar = 0.18
+
+! processes
+SoftQCD:nonDiffractive = on             ! Non Diffractive on
+SoftQCD:singleDiffractive = on          ! Single Diffractive on
+SoftQCD:doubleDiffractive = on          ! Double Diffractive on
+SoftQCD:centralDiffractive = on         ! Central Diffractive on
+SoftQCD:elastic = off                   ! Elastic off
+
+// This is a ropes setting acquired from Peter Christiansen on the Lund thing
+// I have cleaned it up a bit, to avoid duplicate settings ~ Rik
+=======================================================================
+Ropewalk:RopeHadronization = on
+Ropewalk:doShoving = on
+Ropewalk:tInit = 1.5                    ! Propagation time
+Ropewalk:deltat = 0.05
+Ropewalk:tShove 0.1
+Ropewalk:gAmplitude = 0.                ! Set shoving strength to 0 explicitly
+Ropewalk:doFlavour = on
+Ropewalk:r0 = 0.5
+Ropewalk:m0 = 0.2
+Ropewalk:beta = 0.1
+=======================================================================
+// Enabling setting of vertex information, needed for ropes (?)
+PartonVertex:setVertex = on
+PartonVertex:protonRadius = 0.7         ! not default, but corresponds to 14 TeV
+PartonVertex:emissionWidth = 0.1        ! This is default
+=======================================================================
+
+! Decay Supression
+ParticleDecays:limitTau0 = on           ! Only particles with tau0 < tau0Max are decayed.
+ParticleDecays:tau0Max = 0.01           ! tau0Max of 0.01 will stop all weak decays, allowing us to directly count charm/beauty hadrons. 
+
+! strange hadron decays off
+! Note that K0 (K0bar) are allowed to decay!
+! If we use decay suppression, these are redundant, except for the sigma0 which decays with tau0 ~ e(-8).
+! All other strange hadrons decay with tau0 > 10.
+130:mayDecay  = off     ! K0L
+321:mayDecay  = off     ! K+
+310:mayDecay  = off     ! K0s
+3122:mayDecay = off     ! labda0
+3112:mayDecay = off     ! sigma-
+3212:mayDecay = off     ! sigma0 ALWAYS NEED THIS
+3222:mayDecay = off     ! sigma+
+3312:mayDecay = off     ! xi-
+3322:mayDecay = off     ! xi+
+3334:mayDecay = off     ! omega-
+
+Beams:idA = 2212        ! beam 1 proton
+Beams:idB = 2212        ! beam 2 proton
