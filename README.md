@@ -4,7 +4,7 @@ This repository contains the simulation and analysis code used for my Bachelor t
 
 **“Strange Hadron Production in Proton–Proton Collisions: Evaluating PYTHIA 8 Hadronisation Models Against ALICE Measurements.”**
 
-The project investigates strange meson and baryon production in proton–proton collisions at √s = 7 TeV, comparing the default PYTHIA 8 Monash tune with the junction-enhanced colour reconnection model.
+The project investigates strange meson and baryon production in proton–proton collisions at √s = 7 TeV, comparing the default PYTHIA 8 Monash tune with the junction-enhanced colour reconnection model. Subsequently, I also compare both models to published data from the LHC at CERN.
 
 ---
 
